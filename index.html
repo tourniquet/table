@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>First task</title>
+  <link rel="stylesheet" href="libs/jqueryUI/jquery-ui.css">
+   
+  <style>
+    body { font-size: 62.5%; }
+    label, input { display:block; }
+    input.text { margin-bottom:12px; width:95%; padding: .4em; }
+    fieldset { padding:0; border:0; margin-top:25px; }
+    h1 { font-size: 1.2em; margin: .6em 0; }
+    div#users-contain { width: 350px; margin: 20px 0; }
+    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+    .ui-dialog .ui-state-error { padding: .3em; }
+    #showLabels { width: 550px; text-align: right; }
+    a:link, a:visited, a:active { text-decoration: none; }
+  </style>
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
+</head>
+<body>
+
+  <script type="x-tmpl-mustache" id="template">
+      {{ #getData }}
+        <tr>
+          <td>ML{{ id }}</td>
+          <td>{{ title }}</td>
+          <td>{{ brand }}</td>
+          <td>{{ launchTime }}</td>
+          <td>{{ usd }}</td>
+          <td>{{ chf }}</td>
+          <td>Some Status</td>
+          <td>
+            <a href='javascript:editItem("{{ id }}");'><span class="ui-icon ui-icon-wrench" style="float: left;"></span></a>
+            <a href='javascript:removeItem("{{ id }}");'><span class="ui-icon ui-icon-trash"></span></a>
+          </td>
+        </tr>
+      {{/getData}}
+  </script>
+
+  <div id="dialog-form" title="Market Launch" style="display:none">
+  </div>
+
+  <div id="edit-form" title="Market Launch" style="display:none;">
+  </div>
+
+  <div id='remove-form' title='Remove element' style='display:none;'>
+    These item will be permanently deleted and cannot be recovered. Are you sure?
+  </div>
+
+  <!-- <button id="saveChanges">Add Market Launch</button> -->
+  <input type="button" id="saveChanges" value="Add Market Launch" onclick="openModal();">
+
+  <div id="users-contain" class="ui-widget">
+  <!-- <h1>Existing Users:</h1> -->
+    <table id="showData" class="ui-widget ui-widget-content">
+      <thead>
+        <tr class="ui-widget-header">
+          <th><a href="javascript:sortToUp('id')">ID</a></th>
+          <th><a href="javascript:sortToUp('title')">Title</a></th>
+          <th><a href="javascript:sortToUp('brand')">Brand</a></th>
+          <th><a href="javascript:sortToUp('launchTime')">Launch Timeframe</a></th>
+          <th><a href="javascript:sortToUp('usd')">Est. Sales Potential (USD)</a></th>
+          <th><a href="javascript:sortToUp('chf')">Est. Sales Potential (CHF)</a></th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="showInfo">
+
+      </tbody>
+      </table>
+  </div>
+
+  <script type="x-tmpl-mustache" id="leftLabel">
+    #of Market Launches: {{ marketLaunches }} <br />
+    Regional total amount of estimated sales potential: {{ regionalSalesPotential }} <br />
+    Global total amount of estimated sales potential: {{ globalSalesPotential }} <br />
+  </script>
+  
+  <div id="showLabels">  
+  </div>
+
+  <script src="libs/jquery-1.11.1.min.js"></script>
+  <script src="libs/jqueryUI/jquery-ui.js"></script>
+  <script src="libs/jquery.validate.js"></script>
+  <script src="js/getPutLocalStorage.js"></script>
+  <script src="js/template.js"></script>
+  <script src="js/validateForm.js"></script>
+  <script src="js/sort.js"></script>
+</body>
+</html>
