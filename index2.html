@@ -4,8 +4,39 @@
     <meta charset="utf-8">
     <title>Yopeso Task</title>
     <link rel="stylesheet" href="assets/styles/dependencies/material.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="assets/styles/style.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
+    <div class="content-grid mdl-layout">
+      <div class="mdl-cell mdl-cell--12-col">
+        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Brand</th>
+              <th>Launch Timeframe</th>
+              <th>Est. Sales Potential (USD)</th>
+              <th>Est. Sales Potential (CHF)</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="market in markets">
+              <td>{{ market.id }}</td>
+              <td>{{ market.title }}</td>
+              <td>{{ market.brand }}</td>
+              <td>{{ market.estSalesUsd }}</td>
+              <td>{{ market.estSalesUsd }}</td>
+              <td>{{ market.estSalesChf }}</td>
+              <td>{{ market.status }}</td>
+              <td>{{ market.action }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
     <script src="assets/js/dependencies/vue.js"></script>
     <script src="assets/js/dependencies/material.min.js"></script>
