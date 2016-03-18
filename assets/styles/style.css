@@ -1,4 +1,15 @@
+/* page elements */
 .content-grid {
   max-width: 1170px;
+  margin: 0 auto;
+}
+
+/* table elements */
+table {
+  width: 100%;
+}
+
+/* form elements */
+#add-ride {
   margin: 0 auto;
 }
