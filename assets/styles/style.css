@@ -10,6 +10,19 @@ table {
 }
 
 /* form elements */
-#add-ride {
+#add-market {
   margin: 0 auto;
+}
+
+.md-18 {
+  font-size: 18px;
+}
+
+.cursor {
+  color: #9E9E9E;
+  cursor: pointer;
+}
+
+.material-icons:hover {
+  color: black;
 }
