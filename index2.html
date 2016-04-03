@@ -34,7 +34,7 @@
                 <td>{{ market.estSalesEur }}€</td>
                 <td>{{ market.status }}</td>
                 <td class="cursor">
-                  <i @click="editMarket($index)" class="material-icons md-18 md-dark">build</i>
+                  <i @click="populateData($index)" class="material-icons md-18 md-dark">build</i>
                   <i @click="removeMarket($index)" class="material-icons md-18 md-dark">delete_forever</i>
                 </td>
               </tr>
@@ -43,45 +43,44 @@
         </div>
       </div>
 
-      <form id="form" action="" method="">
-        <div class="mdl-grid">
-          <div class="mdl-cell mdl-cell--1-col"></div>
+      <div id="form" class="mdl-grid">
+        <div class="mdl-cell mdl-cell--1-col"></div>
 
-          <div class="mdl-cell mdl-cell--2-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input v-model="form.title" class="mdl-textfield__input" type="text" name="title">
-            <label class="mdl-textfield__label" for="title">title</label>
-          </div>
-
-          <div class="mdl-cell mdl-cell--2-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input v-model="form.brand" class="mdl-textfield__input" type="text" name="brand">
-            <label class="mdl-textfield__label" for="brand">brand</label>
-          </div>
-
-          <div class="mdl-cell mdl-cell--2-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input v-model="form.launch" class="mdl-textfield__input" type="text" name="launch">
-            <label class="mdl-textfield__label" for="launch">launch</label>
-          </div>
-
-          <div class="mdl-cell mdl-cell--2-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input v-model="form.estSalesUsd" class="mdl-textfield__input" type="text" name="USD" pattern="-?[0-9]*(\.[0-9]+)?">
-            <label class="mdl-textfield__label" for="USD">USD</label>
-            <span class="mdl-textfield__error">Input is not a number!</span>
-          </div>
-
-          <div class="mdl-cell mdl-cell--2-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input v-model="form.status" class="mdl-textfield__input" type="text" name="status">
-            <label class="mdl-textfield__label" for="status">status</label>
-          </div>
-
-          <input @click="addMarket" v-model="button" type="submit" id="add-market" name="name" class="mdl-button mdl-js-button mdl-js-ripple-effect">
-
-          <div class="mdl-cell mdl-cell--1-col"></div>
+        <div class="mdl-cell mdl-cell--2-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input v-model="market.title"  class="mdl-textfield__input" type="text" name="title"> <!-- value="{{ title }}" -->
+          <label class="mdl-textfield__label" for="title">title</label>
         </div>
-      </form>
+
+        <div class="mdl-cell mdl-cell--2-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input v-model="market.brand" class="mdl-textfield__input" type="text" name="brand">
+          <label class="mdl-textfield__label" for="brand">brand</label>
+        </div>
+
+        <div class="mdl-cell mdl-cell--2-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input v-model="market.launch" class="mdl-textfield__input" type="text" name="launch">
+          <label class="mdl-textfield__label" for="launch">launch</label>
+        </div>
+
+        <div class="mdl-cell mdl-cell--2-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input v-model="market.estSalesUsd" class="mdl-textfield__input" type="text" name="USD" pattern="-?[0-9]*(\.[0-9]+)?">
+          <label class="mdl-textfield__label" for="USD">USD</label>
+          <span class="mdl-textfield__error">Input is not a number!</span>
+        </div>
+
+        <div class="mdl-cell mdl-cell--2-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input v-model="market.status" class="mdl-textfield__input" type="text" name="status">
+          <label class="mdl-textfield__label" for="status">status</label>
+        </div>
+
+        <input v-if="mode == 'create'" @click="addMarket" value="add market" type="submit" id="add-market" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+        <input v-if="mode == 'edit'" @click="editMarket" value="edit market" type="submit" id="edit-market" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+        <input @click="cancelButton" value="cancel" type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+
+        <div class="mdl-cell mdl-cell--1-col"></div>
+      </div>
     </div>
 
 
-    <script src="assets/js/dependencies/jquery.min.js"></script>
     <script src="assets/js/dependencies/vue.js"></script>
     <script src="assets/js/dependencies/material.min.js"></script>
     <script src="assets/js/app.js"></script>

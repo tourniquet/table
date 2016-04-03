@@ -1,5 +1,7 @@
+/* globals Vue */
+
 var vm = new Vue({
-  el: 'body',
+  el: '.content-grid',
 
   data: {
     markets: [
@@ -7,7 +9,8 @@ var vm = new Vue({
       { id: '2', title: 'Other', brand: 'Canon', launch: 'august', estSalesUsd: '750', estSalesEur: '480', status: 'Dead' }
     ],
 
-    form: {
+    market: {
+      index: '',
       id: '',
       title: '',
       brand: '',
@@ -17,45 +20,38 @@ var vm = new Vue({
       status: ''
     },
 
-    button: 'add market'
+    mode: 'create'
   },
 
   methods: {
     addMarket () {
-      var self = this
+      var data = Object.assign({}, this.market)
+      data.id = +this.markets[this.markets.length - 1].id + 1
+      this.markets.push(data)
 
-      $('form').on('submit', function (event) {
-        event.preventDefault()
-
-        var newId = +self.markets[self.markets.length - 1].id + 1
-        var result = $(this).serializeArray()
-        var data = {
-          id: newId,
-          title: result[0].value,
-          brand: result[1].value,
-          launch: result[2].value,
-          estSalesUsd: result[3].value,
-          estSalesEur: Math.round(result[3].value * 0.89),
-          status: result[4].value
-        }
-
-        self.markets.push(data)
-        vm.clearInputs()
-      })
+      vm.clearObject()
+      vm.clearInputs()
     },
 
-    editMarket (index) {
-      this.button = 'edit market'
-      this.form = this.markets[index]
+    populateData (index) {
+      this.mode = 'edit'
+      Object.assign(this.market, this.markets[index])
+      this.market.index = index
 
       var inputs = document.getElementsByClassName('mdl-textfield--floating-label')
-      console.log(inputs)
       var intputsArray = Array.from(inputs)
       intputsArray.forEach(function (item) {
         item.className += ' is-dirty'
       })
+    },
 
-      this.markets.splice(index, 1, this.form)
+    editMarket () {
+      var index = this.market.index
+      this.markets.splice(index, 1, JSON.parse(JSON.stringify(this.market)))
+
+      this.mode = 'create'
+      vm.clearObject()
+      vm.clearInputs()
     },
 
     removeMarket (index) {
@@ -70,7 +66,6 @@ var vm = new Vue({
       })
 
       vm.removeFloatingLabel()
-      this.button = 'add market'
     },
 
     removeFloatingLabel () {
@@ -79,6 +74,18 @@ var vm = new Vue({
       intputsArray.forEach(function (item) {
         item.classList.remove('is-dirty')
       })
+    },
+
+    clearObject () {
+      for (var i in this.market) {
+        this.market[i] = ''
+      }
+    },
+
+    cancelButton () {
+      this.mode = 'create'
+      vm.clearObject()
+      vm.clearInputs()
     }
   }
 })
