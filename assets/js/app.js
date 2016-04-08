@@ -27,6 +27,7 @@ var vm = new Vue({
     addMarket () {
       var data = Object.assign({}, this.market)
       data.id = +this.markets[this.markets.length - 1].id + 1
+      data.estSalesEur = (this.market.estSalesUsd * 0.88).toFixed(0)
       this.markets.push(data)
 
       vm.clearObject()
@@ -46,12 +47,14 @@ var vm = new Vue({
     },
 
     editMarket () {
+      this.market.estSalesEur = (this.market.estSalesUsd * 0.88).toFixed(0)
       var index = this.market.index
       this.markets.splice(index, 1, JSON.parse(JSON.stringify(this.market)))
 
       this.mode = 'create'
       vm.clearObject()
       vm.clearInputs()
+      vm.removeFloatingLabel()
     },
 
     removeMarket (index) {
@@ -64,6 +67,12 @@ var vm = new Vue({
       intputsArray.forEach(function (item) {
         item.value = ''
       })
+
+      // remove "is not a number" error
+      var usdError = document.getElementsByClassName('is-invalid')[0]
+      if (usdError) {
+        usdError.classList.remove('is-invalid')
+      }
 
       vm.removeFloatingLabel()
     },

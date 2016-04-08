@@ -10,7 +10,7 @@ table {
 }
 
 /* form elements */
-#add-market, #edit-market {
+.buttons {
   margin: 0 auto;
 }
 

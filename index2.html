@@ -72,9 +72,11 @@
           <label class="mdl-textfield__label" for="status">status</label>
         </div>
 
-        <input v-if="mode == 'create'" @click="addMarket" value="add market" type="submit" id="add-market" class="mdl-button mdl-js-button mdl-js-ripple-effect">
-        <input v-if="mode == 'edit'" @click="editMarket" value="edit market" type="submit" id="edit-market" class="mdl-button mdl-js-button mdl-js-ripple-effect">
-        <input @click="cancelButton" value="cancel" type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+        <div class="buttons">
+          <input v-if="mode == 'create'" @click="addMarket" value="add market" type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+          <input v-if="mode == 'edit'" @click="editMarket" value="edit market" type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+          <input @click="cancelButton" value="cancel" type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+        </div>
 
         <div class="mdl-cell mdl-cell--1-col"></div>
       </div>
