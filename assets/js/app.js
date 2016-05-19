@@ -20,7 +20,10 @@ var vm = new Vue({
       status: ''
     },
 
-    mode: 'create'
+    mode: 'create',
+    sortTo: 'higher',
+    key: 'id',
+    ascending: 1
   },
 
   methods: {
@@ -41,7 +44,7 @@ var vm = new Vue({
 
       var inputs = document.getElementsByClassName('mdl-textfield--floating-label')
       var intputsArray = Array.from(inputs)
-      intputsArray.forEach(function (item) {
+      intputsArray.forEach((item) => {
         item.className += ' is-dirty'
       })
     },
@@ -57,6 +60,14 @@ var vm = new Vue({
       vm.removeFloatingLabel()
     },
 
+    sortBy (key) {
+      if (key === this.key) {
+        this.ascending = (this.ascending === 1 ? -1 : 1)
+        return
+      }
+      this.key = key
+    },
+
     removeMarket (index) {
       this.markets.splice(index, 1)
     },
@@ -64,7 +75,7 @@ var vm = new Vue({
     clearInputs () {
       var inputs = document.getElementById('form').getElementsByClassName('mdl-textfield__input')
       var intputsArray = Array.from(inputs)
-      intputsArray.forEach(function (item) {
+      intputsArray.forEach((item) => {
         item.value = ''
       })
 
@@ -80,7 +91,7 @@ var vm = new Vue({
     removeFloatingLabel () {
       var inputs = document.getElementById('form').getElementsByClassName('is-dirty')
       var intputsArray = Array.from(inputs)
-      intputsArray.forEach(function (item) {
+      intputsArray.forEach((item) => {
         item.classList.remove('is-dirty')
       })
     },
